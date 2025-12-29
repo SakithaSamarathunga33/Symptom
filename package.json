@@ -1,0 +1,8 @@
+{
+    "name": "symptom-root",
+    "private": true,
+    "scripts": {
+        "build": "echo 'Installing backend dependencies...' && cd backend && npm install",
+        "start": "cd backend && node server.js"
+    }
+}
