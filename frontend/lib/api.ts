@@ -1,4 +1,8 @@
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://symptom-backend-cws5.onrender.com";
+export const API_URL =
+    process.env.NEXT_PUBLIC_API_URL ||
+    (process.env.NODE_ENV === "development"
+        ? "http://localhost:5000"
+        : "https://symptom-backend-cws5.onrender.com");
 
 export const fetcher = async (url: string, options: RequestInit = {}) => {
     const res = await fetch(`${API_URL}${url}`, {
