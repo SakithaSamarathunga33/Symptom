@@ -10,6 +10,12 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -175,7 +181,8 @@ export function UserManagement() {
                 </Dialog>
             </div>
 
-            <div className="rounded-md border">
+            {/* Desktop View */}
+            <div className="hidden md:block rounded-md border">
                 <Table>
                     <TableHeader>
                         <TableRow>
@@ -230,6 +237,58 @@ export function UserManagement() {
                         )}
                     </TableBody>
                 </Table>
+            </div>
+
+            {/* Mobile View */}
+            <div className="md:hidden grid gap-4">
+                {loading ? (
+                    <div className="flex items-center justify-center h-24">
+                        <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+                    </div>
+                ) : users.length === 0 ? (
+                    <div className="text-center p-4 border rounded-md text-muted-foreground">
+                        No users found.
+                    </div>
+                ) : (
+                    users.map((user) => (
+                        <Card key={user._id}>
+                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                <CardTitle className="text-sm font-medium">
+                                    {user.name}
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="grid gap-2">
+                                    <div className="text-sm text-muted-foreground">
+                                        {user.email}
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                        <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
+                                            {user.role}
+                                        </div>
+                                        <div className="flex gap-2">
+                                            <Button
+                                                variant="ghost"
+                                                size="sm"
+                                                onClick={() => startEdit(user)}
+                                            >
+                                                <Pencil className="h-4 w-4 mr-1" /> Edit
+                                            </Button>
+                                            <Button
+                                                variant="ghost"
+                                                size="sm"
+                                                className="text-destructive hover:text-destructive/90"
+                                                onClick={() => handleDelete(user._id)}
+                                            >
+                                                <Trash2 className="h-4 w-4 mr-1" /> Delete
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    ))
+                )}
             </div>
         </div>
     );

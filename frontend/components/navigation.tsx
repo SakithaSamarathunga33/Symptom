@@ -1,6 +1,13 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ShieldCheck } from "lucide-react"
+import { ShieldCheck, Menu } from "lucide-react"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 
 export function Navigation() {
   return (
@@ -31,9 +38,46 @@ export function Navigation() {
           <Button variant="ghost" size="sm" asChild className="hidden sm:flex">
             <Link href="/explanation-chat">AI Assistant</Link>
           </Button>
-          <Button size="sm" asChild>
+          <Button size="sm" asChild className="hidden sm:flex">
             <Link href="/symptom-input">Get Started</Link>
           </Button>
+
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="md:hidden">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Toggle menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right">
+              <SheetHeader>
+                <SheetTitle>Menu</SheetTitle>
+              </SheetHeader>
+              <nav className="flex flex-col gap-4 mt-6">
+                <Link href="/" className="text-lg font-medium hover:text-primary transition-colors">
+                  Home
+                </Link>
+                <Link href="/symptom-input" className="text-lg font-medium hover:text-primary transition-colors">
+                  Analysis
+                </Link>
+                <Link href="/geo-map" className="text-lg font-medium hover:text-primary transition-colors">
+                  Health Map
+                </Link>
+                <Link href="/dashboard" className="text-lg font-medium hover:text-primary transition-colors">
+                  Dashboard
+                </Link>
+                <Link href="/admin" className="text-lg font-medium hover:text-primary transition-colors">
+                  Admin
+                </Link>
+                <Link href="/explanation-chat" className="text-lg font-medium hover:text-primary transition-colors">
+                  AI Assistant
+                </Link>
+                <Link href="/symptom-input" className="text-lg font-medium hover:text-primary transition-colors">
+                  Get Started
+                </Link>
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>
